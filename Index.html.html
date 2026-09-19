@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mass Plan</title>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Mass Plan">
+<meta name="theme-color" content="#0E6B57">
+<meta name="mobile-web-app-capable" content="yes">
+<link rel="apple-touch-icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALQAAAC0CAIAAACyr5FlAAACO0lEQVR42u3dQU4CQRCGUacyazge3AGO4yG8njdwZ1woEaZ7qrrnvZWJJnZ+v0wYMLCcbpc3+E2YAHEgDsSBOBAH4kAciANxIA4QB+JAHIgDcSAOxIE4EAfiAHEgDsSBOBAH4kAciANxIA4QB+JAHIgDcSAOxIE4EAfiQBwgDsSBOBAH4kAciANxIA6OZ8399Z/vH39963y/HufPUHOHJesDAB/McahEKu8QlRd56icnLiNrh6i8yNx91N8hii8yax9D7OBuhRpxbAl/povHKDu4ciAOxIE4EAepmr228v0o+ny//vzaxLvd+zRfPtqeb+L7z7HuipssH/3Op4+sMlotH13Pp4+sMposH73Pp4+sMrYv724FcSAOxIE4EAfiQByIA3EgDhAH4kAciIMU60Bn9U8hrhyIA3EgDsSBOEAciANxIA7EgTgoa6QX3qZ5K5hRXkF05UAciANxIA7EgTgQB+JAHIgDxIE4EAfiYLw4/v8PFj6Vp619lo8dTqmMrD42Lh+9T6mMrD62Lx9dT6mMrD6aLL/2OKUmsvpou7y7FcSBOBAH4uA4cWx5LD3THdAoO7hyUCaO18Kf74mTIXaI+rvM+pRa/R2i+C5zP9lafIfldLskrvPgzQgO9Rx8zR2S48ADUsSBOBAH4gBxIA7EgTgQB+JAHIgDcSAOEAfiQByIA3EgDsSBOBAH4gBxIA7EgTgQB+JAHIgDcSAOxGECxIE4EAfiQByIA3EgDsSBOEAciANxIA4yfAHRJYsoO959BQAAAABJRU5ErkJggg==">
+<link rel="icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALQAAAC0CAIAAACyr5FlAAACO0lEQVR42u3dQU4CQRCGUacyazge3AGO4yG8njdwZ1woEaZ7qrrnvZWJJnZ+v0wYMLCcbpc3+E2YAHEgDsSBOBAH4kAciANxIA4QB+JAHIgDcSAOxIE4EAfiAHEgDsSBOBAH4kAciANxIA4QB+JAHIgDcSAOxIE4EAfiQBwgDsSBOBAH4kAciANxIA6OZ8399Z/vH39963y/HufPUHOHJesDAB/McahEKu8QlRd56icnLiNrh6i8yNx91N8hii8yax9D7OBuhRpxbAl/povHKDu4ciAOxIE4EAepmr228v0o+ny//vzaxLvd+zRfPtqeb+L7z7HuipssH/3Op4+sMlotH13Pp4+sMposH73Pp4+sMrYv724FcSAOxIE4EAfiQByIA3EgDhAH4kAciIMU60Bn9U8hrhyIA3EgDsSBOEAciANxIA7EgTgoa6QX3qZ5K5hRXkF05UAciANxIA7EgTgQB+JAHIgDxIE4EAfiYLw4/v8PFj6Vp619lo8dTqmMrD42Lh+9T6mMrD62Lx9dT6mMrD6aLL/2OKUmsvpou7y7FcSBOBAH4uA4cWx5LD3THdAoO7hyUCaO18Kf74mTIXaI+rvM+pRa/R2i+C5zP9lafIfldLskrvPgzQgO9Rx8zR2S48ADUsSBOBAH4gBxIA7EgTgQB+JAHIgDcSAOEAfiQByIA3EgDsSBOBAH4gBxIA7EgTgQB+JAHIgDcSAOxGECxIE4EAfiQByIA3EgDsSBOEAciANxIA4yfAHRJYsoO959BQAAAABJRU5ErkJggg==">
+
+<style>
+:root{
+  --ground:#FFFFFF; --panel:#F3F5F2; --ink:#141C18; --muted:#5F6B64;
+  --line:#D3D9D3; --accent:#0E6B57; --accent-soft:#E0EDE8;
+  --amber:#A85E12; --amber-soft:#F8ECDA;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0;background:var(--ground);color:var(--ink);
+  font:17px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+}
+.wrap{max-width:760px;margin:0 auto;padding:env(safe-area-inset-top) calc(18px + env(safe-area-inset-right)) calc(80px + env(safe-area-inset-bottom)) calc(18px + env(safe-area-inset-left))}
+h1{font-size:clamp(30px,7.5vw,44px);line-height:1.05;letter-spacing:-.02em;margin:32px 0 10px;font-weight:800}
+.sub{margin:0 0 4px;color:var(--muted);max-width:48ch;font-size:17px}
+
+nav{margin:26px 0 8px;padding:16px 18px;background:var(--panel);border-radius:12px}
+nav p{margin:0 0 10px;font-weight:700;font-size:15px}
+nav a{
+  display:inline-block;margin:0 6px 6px 0;padding:8px 15px;
+  background:#fff;border:1px solid var(--line);border-radius:999px;
+  color:var(--ink);text-decoration:none;font-weight:600;font-size:15px;
+}
+nav a:hover{border-color:var(--accent);color:var(--accent)}
+a:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+
+.day{padding-top:34px}
+.day h2{font-size:clamp(24px,6vw,32px);line-height:1.1;margin:0;letter-spacing:-.015em;font-weight:800}
+.daymeta{color:var(--muted);font-size:15px;margin:6px 0 14px}
+
+.ex{
+  display:grid;grid-template-columns:54px 1fr 96px;gap:14px;align-items:start;
+  padding:16px 0;border-top:1px solid var(--line);break-inside:avoid;page-break-inside:avoid;
+}
+.ex:last-of-type{border-bottom:1px solid var(--line)}
+.fig{width:54px;height:auto;display:block}
+.exname{font-size:19px;font-weight:700;line-height:1.2;margin:0 0 4px;letter-spacing:-.01em}
+.cue{margin:0;font-size:15px;color:var(--muted)}
+.demo{display:inline-block;margin-top:8px;font-size:15px;font-weight:700;color:var(--accent);text-decoration:none;border-bottom:2px solid var(--accent-soft)}
+.demo:hover{border-bottom-color:var(--accent)}
+.load{text-align:right}
+.reps{display:block;font-size:22px;font-weight:800;line-height:1.1;letter-spacing:-.02em}
+.rest{display:block;font-size:13px;color:var(--muted);margin-top:5px}
+.pair{font-size:12px;font-weight:700;color:var(--amber);letter-spacing:.05em;margin:0 0 3px}
+.lbadge{display:inline-block;margin-top:8px;font-size:13px;font-weight:700;background:var(--amber-soft);color:var(--amber);padding:4px 10px;border-radius:999px}
+
+.note{background:var(--panel);border-left:5px solid var(--accent);padding:15px 17px;margin-top:20px;border-radius:0 10px 10px 0;break-inside:avoid}
+.note h3{font-size:17px;margin:0 0 6px;font-weight:700}
+.note p{margin:0;font-size:16px}
+
+section.ref{padding-top:34px}
+section.ref h2{font-size:26px;margin:0 0 10px;font-weight:800;letter-spacing:-.015em}
+section.ref h3{font-size:18px;margin:20px 0 5px;font-weight:700}
+section.ref p,section.ref li{font-size:16px}
+section.ref ul,section.ref ol{padding-left:22px;margin:8px 0}
+section.ref li{margin-bottom:8px}
+.big{font-weight:800;color:var(--accent)}
+footer{margin-top:44px;padding-top:20px;border-top:1px solid var(--line);color:var(--muted);font-size:14px}
+.legend{display:flex;gap:18px;align-items:center;margin:14px 0 0;font-size:14px;color:var(--muted);flex-wrap:wrap}
+.sw{display:inline-block;width:14px;height:14px;border-radius:3px;vertical-align:-2px;margin-right:6px}
+
+@media (max-width:400px){
+  .ex{grid-template-columns:44px 1fr 84px;gap:10px}
+  .fig{width:44px}
+  .reps{font-size:19px}
+  .exname{font-size:17.5px}
+}
+@media print{
+  nav{display:none}
+  body{font-size:11pt}
+  .day{page-break-before:always;break-before:page;padding-top:0}
+  #mon{page-break-before:avoid;break-before:auto}
+  section.ref{page-break-before:always;break-before:page}
+  a{color:var(--ink);text-decoration:none}
+  .demo::after{content:" — search: " attr(data-q);font-weight:400;color:#666;font-size:9pt}
+}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+<defs>
+<symbol id="body" viewBox="0 0 100 182"><g fill="#C6CDC6">
+<circle cx="50" cy="14" r="9"/><rect x="45" y="21" width="10" height="6"/>
+<path d="M36 29 L50 25 L64 29 L60 37 L50 33 L40 37 Z"/>
+<ellipse cx="28" cy="41" rx="10" ry="9"/><ellipse cx="72" cy="41" rx="10" ry="9"/>
+<path d="M38 36 L50 34 L50 56 Q42 60 37 52 Q35 43 38 36 Z"/>
+<path d="M62 36 L50 34 L50 56 Q58 60 63 52 Q65 43 62 36 Z"/>
+<path d="M35 48 L33 66 L41 74 L43 58 Z"/><path d="M65 48 L67 66 L59 74 L57 58 Z"/>
+<rect x="42" y="57" width="16" height="33" rx="4"/>
+<rect x="19" y="48" width="8" height="27" rx="4"/><rect x="73" y="48" width="8" height="27" rx="4"/>
+<rect x="27.5" y="48" width="5" height="27" rx="2.5"/><rect x="67.5" y="48" width="5" height="27" rx="2.5"/>
+<rect x="18" y="76" width="11" height="29" rx="5"/><rect x="71" y="76" width="11" height="29" rx="5"/>
+<circle cx="23.5" cy="110" r="5"/><circle cx="76.5" cy="110" r="5"/>
+<rect x="39" y="91" width="22" height="12" rx="4"/>
+<rect x="36" y="102" width="8" height="37" rx="4"/><rect x="56" y="102" width="8" height="37" rx="4"/>
+<rect x="44.5" y="102" width="4.5" height="37" rx="2"/><rect x="51" y="102" width="4.5" height="37" rx="2"/>
+<rect x="38" y="142" width="11" height="29" rx="5"/><rect x="51" y="142" width="11" height="29" rx="5"/>
+<rect x="37" y="172" width="12" height="7" rx="3"/><rect x="51" y="172" width="12" height="7" rx="3"/>
+</g></symbol>
+<symbol id="h-traps" viewBox="0 0 100 182"><path d="M36 29 L50 25 L64 29 L60 37 L50 33 L40 37 Z" fill="#0E6B57"/></symbol>
+<symbol id="h-delts" viewBox="0 0 100 182"><g fill="#0E6B57"><ellipse cx="28" cy="41" rx="10" ry="9"/><ellipse cx="72" cy="41" rx="10" ry="9"/></g></symbol>
+<symbol id="h-chest" viewBox="0 0 100 182"><g fill="#0E6B57"><path d="M38 36 L50 34 L50 56 Q42 60 37 52 Q35 43 38 36 Z"/><path d="M62 36 L50 34 L50 56 Q58 60 63 52 Q65 43 62 36 Z"/></g></symbol>
+<symbol id="h-lats" viewBox="0 0 100 182"><g fill="#0E6B57"><path d="M35 48 L33 66 L41 74 L43 58 Z"/><path d="M65 48 L67 66 L59 74 L57 58 Z"/></g></symbol>
+<symbol id="h-biceps" viewBox="0 0 100 182"><g fill="#0E6B57"><rect x="19" y="48" width="8" height="27" rx="4"/><rect x="73" y="48" width="8" height="27" rx="4"/></g></symbol>
+<symbol id="h-triceps" viewBox="0 0 100 182"><g fill="#0E6B57"><rect x="27.5" y="48" width="5" height="27" rx="2.5"/><rect x="67.5" y="48" width="5" height="27" rx="2.5"/></g></symbol>
+<symbol id="h-forearms" viewBox="0 0 100 182"><g fill="#0E6B57"><rect x="18" y="76" width="11" height="29" rx="5"/><rect x="71" y="76" width="11" height="29" rx="5"/></g></symbol>
+<symbol id="h-quads" viewBox="0 0 100 182"><g fill="#0E6B57"><rect x="36" y="102" width="8" height="37" rx="4"/><rect x="56" y="102" width="8" height="37" rx="4"/></g></symbol>
+<symbol id="h-hams" viewBox="0 0 100 182"><g fill="#0E6B57"><rect x="44.5" y="102" width="4.5" height="37" rx="2"/><rect x="51" y="102" width="4.5" height="37" rx="2"/></g></symbol>
+<symbol id="h-glutes" viewBox="0 0 100 182"><rect x="39" y="91" width="22" height="12" rx="4" fill="#0E6B57"/></symbol>
+<symbol id="h-calves" viewBox="0 0 100 182"><g fill="#0E6B57"><rect x="38" y="142" width="11" height="29" rx="5"/><rect x="51" y="142" width="11" height="29" rx="5"/></g></symbol>
+</defs>
+</svg>
+
+<div class="wrap">
+
+<h1>Six days to bigger arms and a thicker chest</h1>
+<p class="sub">Sessions run 60–80 minutes. Rest fully between sets. The green areas show what each movement is meant to be working.</p>
+<p class="legend"><span><span class="sw" style="background:#0E6B57"></span>Working muscle</span><span><span class="sw" style="background:#C6CDC6"></span>Not the target</span></p>
+
+<nav>
+  <p>Jump to a day</p>
+  <a href="#mon">Mon · Chest &amp; triceps</a>
+  <a href="#tue">Tue · Back &amp; biceps</a>
+  <a href="#wed">Wed · Legs</a>
+  <a href="#thu">Thu · Chest &amp; shoulders</a>
+  <a href="#fri">Fri · Back &amp; arms</a>
+  <a href="#sat">Sat · Arms</a>
+  <a href="#rules">The rules</a>
+  <a href="#leftarm">Left arm</a>
+  <a href="#forearms">Forearms</a>
+  <a href="#food">Eating</a>
+</nav>
+
+<!-- MONDAY -->
+<div class="day" id="mon">
+<h2>Monday — chest and triceps</h2>
+<p class="daymeta">7 exercises · about 70 minutes</p>
+
+<div class="ex">
+<svg class="fig" viewBox="0 0 100 182"><use href="#body"/><use href="#h-chest"/><use href="#h-delts"/><use href="#h-triceps"/></svg>
+<div><h3 class="exname">Incline Dumbbell Press</h3><p class="cue">Bench at 30°. Lower until you feel the stretch across the chest, not until the dumbbells touch.</p><a class="demo" data-q="incline dumbbell press form" href="https://www.youtube.com/results?search_query=incline+dumbbell+press+form" target="_blank" rel="noopener">Watch demo</a></div>
+<div class="load"><span class="reps">4 × 6–10</span><span class="rest">3 min rest</span></div>
+</div>
+
+<div class="ex">
+<svg class="fig" viewBox="0 0 100 182"><use href="#body"/><use href="#h-chest"/><use href="#h-triceps"/></svg>
+<div><h3 class="exname">Weighted Dips</h3><p class="cue">Lean the torso forward about 30° to shift the work onto the chest.</p><a class="demo" data-q="weighted chest dips technique" href="https://www.youtube.com/results?search_query=weighted+chest+dips+technique" target="_blank" rel="noopener">Watch demo</a></div>
+<div class="load"><span class="reps">3 × 8–12</span><span class="rest">2–3 min rest</span></div>
+</div>
+
+<div class="ex">
+<svg class="fig" viewBox="0 0 100 182"><use href="#body"/><use href="#h-chest"/></svg>
+<div><h3 class="exname">Flat Dumbbell Press</h3><p class="cue">Three seconds down, pause in the stretched position, then drive up.</p><a class="demo" data-q="flat dumbbell bench press form" href="https://www.youtube.com/results?search_query=flat+dumbbell+bench+press+form" target="_blank" rel="noopener">Watch demo</a></div>
+<div class="load"><span class="reps">3 × 10–12</span><span class="rest">2 min rest</span></div>
+</div>
+
+<div class="ex">
+<svg class="fig" viewBox="0 0 100 182"><use href="#body"/><use href="#h-chest"/></svg>
+<div><h3 class="exname">Low-to-High Cable Flye</h3><p class="cue">Pulleys at the bottom, hands finish just above chest height.</p><a class="demo" data-q="low to high cable fly chest" href="https://www.youtube.com/results?search_query=low+to+high+cable+fly+chest" target="_blank" rel="noopener">Watch demo</a></div>
+<div class="load"><span class="reps">3 × 12–15</span><span class="rest">90 sec rest</span></div>
+</div>
+
+<div class="ex">
+<svg class="fig" viewBox="0 0 100 182"><use href="#body"/><use href="#h-triceps"/></svg>
+<div><h3 class="exname">Overhead Cable Extension</h3><p class="cue">Rope, facing away, elbows high. The most important triceps movement in the plan.</p><a class="demo" data-q="overhead cable tricep extension rope" href="https://www.youtube.com/results?search_query=overhead+cable+tricep+extension+rope" target="_blank" rel="noopener">Watch demo</a></div>
+<div class="load"><span class="reps">4 × 10–15</span><span class="rest">90 sec rest</span></div>
+</div>
+
+<div class="ex">
+<svg class="fig" viewBox="0 0 100 182"><use href="#body"/><use href="#h-triceps"/></svg>
+<div><h3 class="exname">EZ-Bar Skull Crusher</h3><p class="cue">Lower to behind the head, not to the forehead. Keeps the long head loaded.</p><a class="demo" data-q="skull crusher behind head long head" href="https://www.youtube.com/results?search_query=skull+crusher+behind+head+long+head" target="_blank" rel="noopener">Watch demo</a></div>
+<div class="load"><span class="reps">3 × 8–12</span><span class="rest">90 sec rest</span></div>
+</div>
+
+<div class="ex">
+<svg class="fig" viewBox="0 0 100 182"><use href="#body"/><use href="#h-triceps"/></svg>
+<div><h3 class="exname">Rope Pushdown</h3><p class="cue">Drop set on the final set: cut the weight by a third and go again.</p><a class="demo" data-q="tricep rope pushdown form" href="https://www.youtube.com/results?search_query=tricep+rope+pushdown+form" target="_blank" rel="noopener">Watch demo</a></div>
+<div class="load"><span class="reps">2 × 12–15</span><span class="rest">60 sec rest</span></div>
+</div>
+
+<p class="daymeta" style="margin-top:20px;font-weight:700;color:#A85E12">FOREARM FINISHER</p>
+<div class="ex">
+<svg class="fig" viewBox="0 0 100 182"><use href="#body"/><use href="#h-forearms"/></svg>
+<div><h3 class="exname">Wrist Roller</h3><p class="cue">Roll the weight all the way down and back up without setting your arms down. Two minutes of genuine misery, and the single best forearm builder there is.</p><a class="demo" data-q="wrist roller forearm exercise" href="https://www.youtube.com/results?search_query=wrist+roller+forearm+exercise" target="_blank" rel="noopener">Watch demo</a></div>
+<div class="load"><span class="reps">3 × up &amp; down</span><span class="rest">60 sec rest</span></div>
+</div>
+
+<div class="note"><h3>Why so much overhead work?</h3><p>The long head makes up roughly two thirds of your triceps mass, and pushdowns barely touch it. If your arms look small from the side, this is the gap.</p></div>
+</div>
+
+<!-- TUESDAY -->
+<div class="day" id="tue">
+<h2>Tuesday — back and biceps</h2>
+<p class="daymeta">7 exercises · about 70 minutes</p>
+
+<div class="ex">
+<svg class="fig" viewBox="0 0 100 182"><use href="#body"/><use href="#h-lats"/><use href="#h-biceps"/></svg>
+<div><h3 class="exname">Weighted Pull-Up</h3><p class="cue">Lat pulldown is a fine substitute. Full hang at the bottom of every rep.</p><a class="demo" data-q="weighted pull up form" href="https://www.youtube.com/results?search_query=weighted+pull+up+form" target="_blank" rel="noopener">Watch demo</a></div>
+<div class="load"><span class="reps">4 × 6–10</span><span class="rest">3 min rest</span></div>
+</div>
+
+<div class="ex">
+<svg class="fig" viewBox="0 0 100 182"><use href="#body"/><use href="#h-lats"/><use href="#h-traps"/></svg>
+<div><h3 class="exname">Chest-Supported Row</h3><p class="cue">Chest stays on the pad. Pull to the lower ribs, squeeze, control the return.</p><a class="demo" data-q="chest supported row form" href="https://www.youtube.com/results?search_query=chest+supported+row+form" target="_blank" rel="noopener">Watch demo</a></div>
+<div class="load"><span class="reps">4 × 8–12</span><span class="rest">2–3 min rest</span></div>
+</div>
+
+<div class="ex">
+<svg class="fig" viewBox="0 0 100 182"><use href="#body"/><use href="#h-lats"/></svg>
+<div><h3 class="exname">Single-Arm Cable Row</h3><p class="cue">Let the shoulder travel forward at the front to get a full stretch.</p><a class="demo" data-q="single arm cable row form" href="https://www.youtube.com/results?search_query=single+arm+cable+row+form" target="_blank" rel="noopener">Watch demo</a><br><span class="lbadge">Left arm first, match reps</span></div>
+<div class="load"><span class="reps">3 × 10–12</span><span class="rest">each side</span></div>
+</div>
+
+<div class="ex">
+<svg class="fig" viewBox="0 0 100 182"><use href="#body"/><use href="#h-lats"/></svg>
+<div><h3 class="exname">Straight-Arm Pulldown</h3><p class="cue">Soft elbows at a fixed angle. Think about pushing the bar down, not pulling it.</p><a class="demo" data-q="straight arm pulldown lats" href="https://www.youtube.com/results?search_query=straight+arm+pulldown+lats" target="_blank" rel="noopener">Watch demo</a></div>
+<div class="load"><span class="reps">3 × 12–15</span><span class="rest">90 sec rest</span></div>
+</div>
+
+<div class="ex">
+<svg class="fig" viewBox="0 0 100 182"><use href="#body"/><use href="#h-biceps"/></svg>
+<div><h3 class="exname">Incline Dumbbell Curl</h3><p class="cue">Bench at 45–60°, arms hanging behind you. The stretch is the whole point.</p><a class="demo" data-q="incline dumbbell curl form" href="https://www.youtube.com/results?search_query=incline+dumbbell+curl+form" target="_blank" rel="noopener">Watch demo</a><br><span class="lbadge">Left arm first, match reps</span></div>
+<div class="load"><span class="reps">4 × 8–12</span><span class="rest">90 sec rest</span></div>
+</div>
+
+<div class="ex">
+<svg class="fig" viewBox="0 0 100 182"><use href="#body"/><use href="#h-biceps"/><use href="#h-forearms"/></svg>
+<div><h3 class="exname">Hammer Curl</h3><p class="cue">Neutral grip throughout. Builds the brachialis, which physically pushes the bicep up.</p><a class="demo" data-q="hammer curl brachialis form" href="https://www.youtube.com/results?search_query=hammer+curl+brachialis+form" target="_blank" rel="noopener">Watch demo</a><br><span class="lbadge">Left arm first, match reps</span></div>
+<div class="load"><span class="reps">3 × 10–12</span><span class="rest">90 sec rest</span></div>
+</div>
+
+<div class="ex">
+<svg class="fig" viewBox="0 0 100 182"><use href="#body"/><use href="#h-biceps"/></svg>
+<div><h3 class="exname">Cable Curl, Elbows Back</h3><p class="cue">Stand slightly ahead of the pulley so your elbows sit behind the torso.</p><a class="demo" data-q="bayesian cable curl form" href="https://www.youtube.com/results?search_query=bayesian+cable+curl+form" target="_blank" rel="noopener">Watch demo</a></div>
+<div class="load"><span class="reps">3 × 12–15</span><span class="rest">60 sec rest</span></div>
+</div>
+
+<div class="note"><h3>Two extra left-arm sets today</h3><p>After the cable curls, do two more sets with the left arm only — one curl, one hammer curl, same reps as your working sets.</p></div>
+</div>
+
+<!-- WEDNESDAY -->
+<div class="day" id="wed">
+<h2>Wednesday — legs, done properly once</h2>
+<p class="daymeta">5 exercises · about 55 minutes</p>
+
+<div class="ex">
+<svg class="fig" viewBox="0 0 100 182"><use href="#body"/><use href="#h-quads"/><use href="#h-glutes"/></svg>
+<div><h3 class="exname">Squat or Hack Squat</h3><p class="cue">The hack squat is easier to load safely if you train alone.</p><a class="demo" data-q="hack squat form" href="https://www.youtube.com/results?search_query=hack+squat+form" target="_blank" rel="noopener">Watch demo</a></div>
+<div class="load"><span class="reps">4 × 6–10</span><span class="rest">3 min rest</span></div>
+</div>
+
+<div class="ex">
+<svg class="fig" viewBox="0 0 100 182"><use href="#body"/><use href="#h-hams"/><use href="#h-glutes"/></svg>
+<div><h3 class="exname">Romanian Deadlift</h3><p class="cue">Push the hips back, bar close to the legs, stop when the hamstrings run out of stretch.</p><a class="demo" data-q="romanian deadlift form" href="https://www.youtube.com/results?search_query=romanian+deadlift+form" target="_blank" rel="noopener">Watch demo</a></div>
+<div class="load"><span class="reps">3 × 8–12</span><span class="rest">3 min rest</span></div>
+</div>
+
+<div class="ex">
+<svg class="fig" viewBox="0 0 100 182"><use href="#body"/><use href="#h-quads"/></svg>
+<div><h3 class="exname">Leg Press</h3><p class="cue">Full depth, without the lower back rounding off the pad.</p><a class="demo" data-q="leg press form" href="https://www.youtube.com/results?search_query=leg+press+form" target="_blank" rel="noopener">Watch demo</a></div>
+<div class="load"><span class="reps">3 × 12–15</span><span class="rest">2 min rest</span></div>
+</div>
+
+<div class="ex">
+<svg class="fig" viewBox="0 0 100 182"><use href="#body"/><use href="#h-hams"/></svg>
+<div><h3 class="exname">Seated or Lying Leg Curl</h3><p class="cue">The seated version trains the hamstrings at longer lengths. Use it if you have one.</p><a class="demo" data-q="seated leg curl form" href="https://www.youtube.com/results?search_query=seated+leg+curl+form" target="_blank" rel="noopener">Watch demo</a></div>
+<div class="load"><span class="reps">3 × 10–15</span><span class="rest">90 sec rest</span></div>
+</div>
+
+<div class="ex">
+<svg class="fig" viewBox="0 0 100 182"><use href="#body"/><use href="#h-calves"/></svg>
+<div><h3 class="exname">Calf Raise</h3><p class="cue">Two-second pause at the bottom stretch, then drive all the way up.</p><a class="demo" data-q="standing calf raise form" href="https://www.youtube.com/results?search_query=standing+calf+raise+form" target="_blank" rel="noopener">Watch demo</a></div>
+<div class="load"><span class="reps">4 × 10–15</span><span class="rest">60 sec rest</span></div>
+</div>
+
+<p class="daymeta" style="margin-top:20px;font-weight:700;color:#A85E12">FOREARM FINISHER</p>
+<div class="ex">
+<svg class="fig" viewBox="0 0 100 182"><use href="#body"/><use href="#h-forearms"/><use href="#h-traps"/></svg>
+<div><h3 class="exname">Farmer's Walk</h3><p class="cue">Heaviest dumbbells you can hold. Walk until the grip is about to fail, put them down, rest, repeat.</p><a class="demo" data-q="farmers walk grip strength form" href="https://www.youtube.com/results?search_query=farmers+walk+grip+strength+form" target="_blank" rel="noopener">Watch demo</a></div>
+<div class="load"><span class="reps">4 × 30–40m</span><span class="rest">90 sec rest</span></div>
+</div>
+
+<div class="note"><h3>One hard leg day beats a bit every day</h3><p>Small daily leg work gives you the fatigue without the stimulus. Train them once, properly, and spend the recovery on your upper body.</p></div>
+</div>
+
+<!-- THURSDAY -->
+<div class="day" id="thu">
+<h2>Thursday — chest and shoulders</h2>
+<p class="daymeta">6 exercises · about 65 minutes</p>
+
+<div class="ex">
+<svg class="fig" viewBox="0 0 100 182"><use href="#body"/><use href="#h-chest"/><use href="#h-triceps"/><use href="#h-delts"/></svg>
+<div><h3 class="exname">Flat Barbell Bench Press</h3><p class="cue">Your heaviest pressing of the week. This is the strength driver.</p><a class="demo" data-q="barbell bench press form" href="https://www.youtube.com/results?search_query=barbell+bench+press+form" target="_blank" rel="noopener">Watch demo</a></div>
+<div class="load"><span class="reps">4 × 5–8</span><span class="rest">3 min rest</span></div>
+</div>
+
+<div class="ex">
+<svg class="fig" viewBox="0 0 100 182"><use href="#body"/><use href="#h-chest"/><use href="#h-delts"/></svg>
+<div><h3 class="exname">Incline Machine Press</h3><p class="cue">Machine or Smith is fine here — you want fatigue, not balance practice.</p><a class="demo" data-q="incline machine chest press" href="https://www.youtube.com/results?search_query=incline+machine+chest+press" target="_blank" rel="noopener">Watch demo</a></div>
+<div class="load"><span class="reps">3 × 10–12</span><span class="rest">2 min rest</span></div>
+</div>
+
+<div class="ex">
+<svg class="fig" viewBox="0 0 100 182"><use href="#body"/><use href="#h-chest"/></svg>
+<div><h3 class="exname">Pec Deck with Partials</h3><p class="cue">After your last full rep, add 4–6 half reps in the stretched position.</p><a class="demo" data-q="pec deck lengthened partials" href="https://www.youtube.com/results?search_query=pec+deck+lengthened+partials" target="_blank" rel="noopener">Watch demo</a></div>
+<div class="load"><span class="reps">3 × 12–15</span><span class="rest">90 sec rest</span></div>
+</div>
+
+<div class="ex">
+<svg class="fig" viewBox="0 0 100 182"><use href="#body"/><use href="#h-delts"/><use href="#h-triceps"/></svg>
+<div><h3 class="exname">Seated Dumbbell Press</h3><p class="cue">Back supported, elbows slightly in front of the body.</p><a class="demo" data-q="seated dumbbell shoulder press form" href="https://www.youtube.com/results?search_query=seated+dumbbell+shoulder+press+form" target="_blank" rel="noopener">Watch demo</a></div>
+<div class="load"><span class="reps">3 × 8–12</span><span class="rest">2 min rest</span></div>
+</div>
+
+<div class="ex">
+<svg class="fig" viewBox="0 0 100 182"><use href="#body"/><use href="#h-delts"/></svg>
+<div><h3 class="exname">Single-Arm Cable Lateral Raise</h3><p class="cue">Light weight, long range. Wider shoulders make your arms read bigger.</p><a class="demo" data-q="cable lateral raise single arm" href="https://www.youtube.com/results?search_query=cable+lateral+raise+single+arm" target="_blank" rel="noopener">Watch demo</a><br><span class="lbadge">Left arm first, match reps</span></div>
+<div class="load"><span class="reps">4 × 12–20</span><span class="rest">each side</span></div>
+</div>
+
+<div class="ex">
+<svg class="fig" viewBox="0 0 100 182"><use href="#body"/><use href="#h-delts"/><use href="#h-traps"/></svg>
+<div><h3 class="exname">Reverse Pec Deck</h3><p class="cue">Rear delts keep the shoulders healthy under this much pressing.</p><a class="demo" data-q="reverse pec deck rear delt" href="https://www.youtube.com/results?search_query=reverse+pec+deck+rear+delt" target="_blank" rel="noopener">Watch demo</a></div>
+<div class="load"><span class="reps">3 × 15–20</span><span class="rest">60 sec rest</span></div>
+</div>
+
+<div class="note"><h3>Lengthened partials</h3><p>Half reps in the bottom, stretched half of the range, done once you can no longer complete a full rep. One of the better-supported ways to squeeze more growth out of a set. Use them on one exercise per session, not all of them.</p></div>
+</div>
+
+<!-- FRIDAY -->
+<div class="day" id="fri">
+<h2>Friday — back and arms</h2>
+<p class="daymeta">7 exercises · about 70 minutes</p>
+
+<div class="ex">
+<svg class="fig" viewBox="0 0 100 182"><use href="#body"/><use href="#h-lats"/><use href="#h-traps"/></svg>
+<div><h3 class="exname">Barbell Row</h3><p class="cue">Torso around 45°, pull to the navel, no heaving with the lower back.</p><a class="demo" data-q="barbell row form" href="https://www.youtube.com/results?search_query=barbell+row+form" target="_blank" rel="noopener">Watch demo</a></div>
+<div class="load"><span class="reps">4 × 6–10</span><span class="rest">3 min rest</span></div>
+</div>
+
+<div class="ex">
+<svg class="fig" viewBox="0 0 100 182"><use href="#body"/><use href="#h-lats"/><use href="#h-biceps"/></svg>
+<div><h3 class="exname">Neutral-Grip Pulldown</h3><p class="cue">Palms facing each other. Easier on the elbows than a wide grip.</p><a class="demo" data-q="neutral grip lat pulldown" href="https://www.youtube.com/results?search_query=neutral+grip+lat+pulldown" target="_blank" rel="noopener">Watch demo</a></div>
+<div class="load"><span class="reps">3 × 10–12</span><span class="rest">2 min rest</span></div>
+</div>
+
+<div class="ex">
+<svg class="fig" viewBox="0 0 100 182"><use href="#body"/><use href="#h-delts"/><use href="#h-traps"/></svg>
+<div><h3 class="exname">Face Pull</h3><p class="cue">Rope to the forehead, elbows high, pull apart at the end.</p><a class="demo" data-q="face pull form" href="https://www.youtube.com/results?search_query=face+pull+form" target="_blank" rel="noopener">Watch demo</a></div>
+<div class="load"><span class="reps">3 × 15–20</span><span class="rest">60 sec rest</span></div>
+</div>
+
+<div class="ex">
+<svg class="fig" viewBox="0 0 100 182"><use href="#body"/><use href="#h-triceps"/><use href="#h-chest"/></svg>
+<div><h3 class="exname">Close-Grip Bench Press</h3><p class="cue">Hands shoulder-width, elbows tucked, bar to the lower chest.</p><a class="demo" data-q="close grip bench press form" href="https://www.youtube.com/results?search_query=close+grip+bench+press+form" target="_blank" rel="noopener">Watch demo</a></div>
+<div class="load"><span class="reps">4 × 8–10</span><span class="rest">2–3 min rest</span></div>
+</div>
+
+<div class="ex">
+<svg class="fig" viewBox="0 0 100 182"><use href="#body"/><use href="#h-biceps"/></svg>
+<div><h3 class="exname">Preacher Curl</h3><p class="cue">Control the bottom third — that is where the growth is and where people cheat.</p><a class="demo" data-q="preacher curl form" href="https://www.youtube.com/results?search_query=preacher+curl+form" target="_blank" rel="noopener">Watch demo</a></div>
+<div class="load"><span class="reps">3 × 8–12</span><span class="rest">90 sec rest</span></div>
+</div>
+
+<div class="ex">
+<svg class="fig" viewBox="0 0 100 182"><use href="#body"/><use href="#h-triceps"/></svg>
+<div><h3 class="exname">Single-Arm Overhead Extension</h3><p class="cue">Your free hand can support the working elbow. Deep stretch behind the head.</p><a class="demo" data-q="single arm overhead dumbbell tricep extension" href="https://www.youtube.com/results?search_query=single+arm+overhead+dumbbell+tricep+extension" target="_blank" rel="noopener">Watch demo</a><br><span class="lbadge">Left arm first, match reps</span></div>
+<div class="load"><span class="reps">3 × 10–12</span><span class="rest">each side</span></div>
+</div>
+
+<div class="ex">
+<svg class="fig" viewBox="0 0 100 182"><use href="#body"/><use href="#h-forearms"/><use href="#h-biceps"/></svg>
+<div><h3 class="exname">Reverse Curl</h3><p class="cue">EZ bar, overhand grip. Go lighter than your ego wants.</p><a class="demo" data-q="reverse curl ez bar form" href="https://www.youtube.com/results?search_query=reverse+curl+ez+bar+form" target="_blank" rel="noopener">Watch demo</a></div>
+<div class="load"><span class="reps">3 × 12–15</span><span class="rest">60 sec rest</span></div>
+</div>
+</div>
+<p class="daymeta" style="margin-top:20px;font-weight:700;color:#A85E12">FOREARM FINISHER</p>
+<div class="ex">
+<svg class="fig" viewBox="0 0 100 182"><use href="#body"/><use href="#h-forearms"/></svg>
+<div><h3 class="exname">Behind-the-Back Wrist Curl</h3><p class="cue">Barbell held behind you, resting against the glutes. Let it roll to the fingertips, then curl it back up.</p><a class="demo" data-q="behind the back barbell wrist curl" href="https://www.youtube.com/results?search_query=behind+the+back+barbell+wrist+curl" target="_blank" rel="noopener">Watch demo</a></div>
+<div class="load"><span class="reps">3 × 15–20</span><span class="rest">60 sec rest</span></div>
+</div>
+
+<div class="ex">
+<svg class="fig" viewBox="0 0 100 182"><use href="#body"/><use href="#h-forearms"/></svg>
+<div><h3 class="exname">Plate Pinch Hold</h3><p class="cue">Two 5kg plates pinched smooth-side-out between thumb and fingers. Hold until they slip.</p><a class="demo" data-q="plate pinch grip hold" href="https://www.youtube.com/results?search_query=plate+pinch+grip+hold" target="_blank" rel="noopener">Watch demo</a><br><span class="lbadge">Left arm first, match reps</span></div>
+<div class="load"><span class="reps">3 × 30–45 sec</span><span class="rest">60 sec rest</span></div>
+</div>
+</div>
+
+<!-- SATURDAY -->
+<div class="day" id="sat">
+<h2>Saturday — arm specialisation</h2>
+<p class="daymeta">7 exercises · about 55 minutes</p>
+<div class="note" style="margin:0 0 18px"><h3>How the supersets work</h3><p>A1 straight into A2 with no break, <em>then</em> rest 90 seconds, then repeat the pair. Same for B1 into B2. Each muscle gets roughly two and a half minutes off while the opposite one works, so you lose no load and save about ten minutes.</p></div>
+
+<div class="ex">
+<svg class="fig" viewBox="0 0 100 182"><use href="#body"/><use href="#h-biceps"/></svg>
+<div><p class="pair">SUPERSET A1</p><h3 class="exname">Bayesian Cable Curl</h3><p class="cue">Cable behind you, single arm. Go straight into the next exercise.</p><a class="demo" data-q="bayesian cable curl tutorial" href="https://www.youtube.com/results?search_query=bayesian+cable+curl+tutorial" target="_blank" rel="noopener">Watch demo</a><br><span class="lbadge">Left arm first, match reps</span></div>
+<div class="load"><span class="reps">4 × 10–12</span><span class="rest">then straight into A2</span></div>
+</div>
+
+<div class="ex">
+<svg class="fig" viewBox="0 0 100 182"><use href="#body"/><use href="#h-triceps"/></svg>
+<div><p class="pair">SUPERSET A2</p><h3 class="exname">Overhead Cable Extension</h3><p class="cue">Straight after the curl, then take your rest.</p><a class="demo" data-q="overhead cable tricep extension rope" href="https://www.youtube.com/results?search_query=overhead+cable+tricep+extension+rope" target="_blank" rel="noopener">Watch demo</a></div>
+<div class="load"><span class="reps">4 × 10–15</span><span class="rest">rest, then repeat</span></div>
+</div>
+
+<div class="ex">
+<svg class="fig" viewBox="0 0 100 182"><use href="#body"/><use href="#h-biceps"/></svg>
+<div><p class="pair">SUPERSET B1</p><h3 class="exname">Spider Curl</h3><p class="cue">Chest against an incline bench, arms hanging straight down.</p><a class="demo" data-q="spider curl form" href="https://www.youtube.com/results?search_query=spider+curl+form" target="_blank" rel="noopener">Watch demo</a></div>
+<div class="load"><span class="reps">3 × 10–12</span><span class="rest">then straight into B2</span></div>
+</div>
+
+<div class="ex">
+<svg class="fig" viewBox="0 0 100 182"><use href="#body"/><use href="#h-triceps"/></svg>
+<div><p class="pair">SUPERSET B2</p><h3 class="exname">JM Press or Close-Grip Push-Up</h3><p class="cue">Elevate your feet on the push-up version once it gets easy.</p><a class="demo" data-q="JM press tricep tutorial" href="https://www.youtube.com/results?search_query=JM+press+tricep+tutorial" target="_blank" rel="noopener">Watch demo</a></div>
+<div class="load"><span class="reps">3 × 10–12</span><span class="rest">90 sec rest</span></div>
+</div>
+
+<div class="ex">
+<svg class="fig" viewBox="0 0 100 182"><use href="#body"/><use href="#h-biceps"/><use href="#h-forearms"/></svg>
+<div><h3 class="exname">Hammer Curl, Myo-Reps</h3><p class="cue">One hard set of 12, then 15 seconds rest and 4 more reps. Repeat that four times.</p><a class="demo" data-q="myo reps hammer curl" href="https://www.youtube.com/results?search_query=myo+reps+hammer+curl" target="_blank" rel="noopener">Watch demo</a><br><span class="lbadge">Left arm first, match reps</span></div>
+<div class="load"><span class="reps">12, then 4×4</span><span class="rest">15 sec rest</span></div>
+</div>
+
+<div class="ex">
+<svg class="fig" viewBox="0 0 100 182"><use href="#body"/><use href="#h-triceps"/></svg>
+<div><h3 class="exname">Rope Pushdown, Drop Set</h3><p class="cue">15 reps, cut the weight, 10 reps, cut again, go to failure.</p><a class="demo" data-q="tricep pushdown drop set" href="https://www.youtube.com/results?search_query=tricep+pushdown+drop+set" target="_blank" rel="noopener">Watch demo</a></div>
+<div class="load"><span class="reps">2 × 15 + drops</span><span class="rest">60 sec rest</span></div>
+</div>
+
+<div class="ex">
+<svg class="fig" viewBox="0 0 100 182"><use href="#body"/><use href="#h-forearms"/></svg>
+<div><h3 class="exname">Wrist Curl and Reverse Wrist Curl</h3><p class="cue">Forearms make the whole arm look bigger and improve your grip on rows.</p><a class="demo" data-q="wrist curl forearm exercise" href="https://www.youtube.com/results?search_query=wrist+curl+forearm+exercise" target="_blank" rel="noopener">Watch demo</a></div>
+<div class="load"><span class="reps">3 × 15–20</span><span class="rest">45 sec rest</span></div>
+</div>
+
+
+<div class="ex">
+<svg class="fig" viewBox="0 0 100 182"><use href="#body"/><use href="#h-forearms"/><use href="#h-biceps"/></svg>
+<div><h3 class="exname">Hammer Lever</h3><p class="cue">Hold a light bar or sledgehammer at the very end, arm at your side. Lower it slowly to each side and back up. Brutal at 3kg.</p><a class="demo" data-q="sledgehammer lever wrist exercise" href="https://www.youtube.com/results?search_query=sledgehammer+lever+wrist+exercise" target="_blank" rel="noopener">Watch demo</a><br><span class="lbadge">Left arm first, match reps</span></div>
+<div class="load"><span class="reps">3 × 8–12</span><span class="rest">each direction</span></div>
+</div>
+
+<div class="ex">
+<svg class="fig" viewBox="0 0 100 182"><use href="#body"/><use href="#h-forearms"/><use href="#h-lats"/></svg>
+<div><h3 class="exname">Towel Dead Hang</h3><p class="cue">Two towels over the bar, hang until you drop. Builds grip and decompresses the spine after a heavy week.</p><a class="demo" data-q="towel dead hang grip" href="https://www.youtube.com/results?search_query=towel+dead+hang+grip" target="_blank" rel="noopener">Watch demo</a></div>
+<div class="load"><span class="reps">3 × max time</span><span class="rest">90 sec rest</span></div>
+</div>
+
+<div class="note"><h3>Two extra left-arm sets today</h3><p>Finish with two left-only sets: one spider curl, one overhead extension. Match the reps you managed on your working sets.</p></div>
+<div class="note"><h3>Sunday</h3><p>Rest. Muscle is built between sessions, not during them. Eat as normal — the surplus matters most on the days you are recovering. A walk is fine; anything that leaves you sore is not.</p></div>
+</div>
+
+<!-- REFERENCE -->
+<section class="ref" id="rules">
+<h2>Five rules that outrank the exercises</h2>
+<h3>Rest 2–3 minutes on compounds</h3>
+<p>Short rests cap the weight you can move, and load is the main driver of growth. Your conditioning is working against you here. 90 seconds is enough on isolation work.</p>
+<h3>Stop 1–2 reps short of failure</h3>
+<p>On the final set of an isolation exercise you can go all the way. Everywhere else, leave a rep in the tank so you can repeat the session on Thursday.</p>
+<h3>Log every set</h3>
+<p>Weight, reps, how hard it felt. If those numbers aren't climbing month to month, nothing else in this plan matters.</p>
+<h3>Add reps before you add weight</h3>
+<p>Given 8–12 reps: stay at the same load until you hit 12 on every set, then add the smallest jump available and drop back to 8.</p>
+<h3>Keep exercises for 8–10 weeks</h3>
+<p>You need time to get strong at a movement. Swapping every week feels productive and isn't.</p>
+</section>
+
+<section class="ref" id="leftarm">
+<h2>Evening out the left arm</h2>
+<ol>
+<li><strong>Always start with the left.</strong> Do your set, count the reps, then match that number exactly on the right — even if the right could do more. This one rule does most of the work.</li>
+<li><strong>Two extra left-only sets, twice a week.</strong> Tuesday and Saturday, at the end of the session. One curl, one extension.</li>
+<li><strong>Favour dumbbells over barbells</strong> on at least two movements a week. A barbell lets the strong side quietly take over.</li>
+<li><strong>Check it isn't technique.</strong> Film yourself pressing and rowing from the front. Uneven bar path or shoulder height is common, and that's a form fix rather than a size problem.</li>
+<li><strong>Measure monthly, not weekly.</strong> Cold and flexed, same point on the arm, first of the month. Give it four to six months.</li>
+</ol>
+<p>Some asymmetry is normal and never fully disappears. You're closing the gap, not erasing it.</p>
+</section>
+
+<section class="ref" id="forearms">
+<h2>Skinny wrists — what will and won't change</h2>
+<p>The wrist joint is bone, tendon and skin. There is no muscle there to grow, so its circumference is largely fixed. Bone does thicken slightly under years of heavy loading, but not on a timescale you'll notice.</p>
+<p>What you can change is everything above it. The forearm flexors and extensors, and the brachioradialis running from the elbow to the thumb side of the wrist, all respond well to training. Build those and the arm stops tapering — which is the look you're actually after. A thick forearm makes a narrow wrist read as a taper rather than as skinny.</p>
+<h3>How the forearm work is spread out</h3>
+<ul>
+<li><strong>Monday.</strong> Wrist roller.</li>
+<li><strong>Wednesday.</strong> Farmer's walks.</li>
+<li><strong>Friday.</strong> Behind-the-back wrist curls and plate pinches, plus the reverse curls already in that session.</li>
+<li><strong>Saturday.</strong> Hammer levers, towel hangs, wrist curls both directions.</li>
+</ul>
+<p>That's four exposures a week. Forearms recover quickly and are used to constant low-level work, so they tolerate more frequency than your chest or biceps.</p>
+<h3>Three things that matter</h3>
+<p><strong>Always put grip work last.</strong> If your forearms are cooked, your grip fails before your lats do on rows and pulldowns, and you lose back training to save forearm training. Bad trade.</p>
+<p><strong>Train both directions.</strong> Everyone does wrist curls and nobody does reverse wrist curls. The extensors on the top of the forearm are smaller, but training them adds visible thickness and protects the elbow — most gym elbow pain is an extensor problem.</p>
+<p><strong>Go lighter than feels right.</strong> Wrist work done heavy turns into arm swinging, and the wrist joint doesn't enjoy being loaded at the end range. Slow, full range, high reps.</p>
+<h3>Free extras</h3>
+<p>Stop using straps on anything under 8 reps unless the grip is genuinely the limiting factor. Add fat grips, or wrap a towel round the handle, on your dumbbell rows and hammer curls — it turns work you're already doing into forearm work at no extra time cost.</p>
+</section>
+
+<section class="ref" id="food">
+<h2>Eating for actual mass</h2>
+<p>At 11 stone and 5&nbsp;ft&nbsp;11, training six days a week, you're almost certainly eating at maintenance. This is the part that decides whether you get bigger.</p>
+<ul>
+<li><span class="big">3,000–3,200 calories</span> a day to start</li>
+<li><span class="big">150–170g protein</span> a day</li>
+<li><span class="big">0.5–1 lb a week</span> on the scale — weigh 3–4 mornings and average them</li>
+<li><span class="big">7–9 hours sleep</span>, non-negotiable at this training volume</li>
+</ul>
+<p>If the weekly average isn't rising after two weeks, add 250 calories a day and check again. If appetite is the problem, blend milk, oats, peanut butter and whey — roughly 700 calories in a glass, drunk in two minutes.</p>
+
+<h3>What the next twelve weeks look like</h3>
+<ul>
+<li><strong>Weeks 1–2.</strong> It'll feel like you're doing less. The longer rests will feel wrong. Check your logbook instead of your feelings.</li>
+<li><strong>Weeks 3–6.</strong> Strength on the main lifts should be climbing. That's the leading indicator that size is coming.</li>
+<li><strong>Weeks 8–12.</strong> Visible change in the arms and chest, assuming the scale has moved.</li>
+<li><strong>Every 6–8 weeks.</strong> Take a lighter week: same exercises, two-thirds the sets, stop four reps short. You'll come back stronger.</li>
+</ul>
+</section>
+
+<footer>
+<p>Demo links open a YouTube search for each movement rather than one fixed video, so nothing here breaks over time. Pick a coaching channel you trust and stick with it.</p>
+<p>General training guidance, not medical advice. If something causes joint pain rather than muscle fatigue, stop and get it looked at.</p>
+</footer>
+
+</div>
+</body>
+</html>
